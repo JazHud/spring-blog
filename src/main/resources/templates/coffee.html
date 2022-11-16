@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/partials.html :: head ('Coffee')"></head>
+<body>
+<nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
+<h1>Coffee!</h1>
+<h2 th:unless="${selections}">Select your favored roast:</h2>
+<div th:if="${selections}">
+    <p>You selected: <span th:text="${selections.get(0).roast}"></span> roast!</p>
+    <p>Here are some options for you:</p>
+    <ul>
+        <li th:each="selection : ${selections}">
+            <p>
+                <span th:text="${selection.brand}"></span>
+                <span th:text="${selection.origin}"></span>
+                <span th:text="${selection.roast}"></span> roast!
+            </p>
+        </li>
+    </ul>
+
+    <!--        <p>We have an amazing <span th:text="${selection.origin}"></span> <span th:text="${selection.roast}"></span> roast!</p>-->
+</div>
+<ul>
+    <li><a href="/coffee/dark">Dark Roast</a></li>
+    <li><a href="/coffee/medium">Medium Roast</a></li>
+    <li><a href="/coffee/light">Light Roast</a></li>
+</ul>
+<div>
+    <p>Want to sign up for our newsletter? Enter your email!</p>
+    <form action="/coffee" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+        <button type="submit">Sign up</button>
+    </form>
+    <p th:if="${email}">Thanks for signing up! We will send the newsletter to <span th:text="${email}"></span>!</p>
+</div>
+</body>
+</html>
