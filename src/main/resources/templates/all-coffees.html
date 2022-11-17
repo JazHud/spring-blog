@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Our Coffees</title>
+</head>
+<body>
+<div>
+  <ul>
+    <li th:each="coffee : ${coffees}">
+      <span th:text="${coffee.brand}"></span>
+      <span th:text="${coffee.origin}"></span>
+      <span th:text="${coffee.roast}"></span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
