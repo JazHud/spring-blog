@@ -16,13 +16,13 @@ public class PostController {
         return "Here are all the posts:...";
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
-    public String OnePost(@PathVariable Long id) {
+    public String onePost(@PathVariable long id) {
         return "Here is post number: " + id;
     }
 
-    @GetMapping(path = "/create")
+    @GetMapping("/create")
     @ResponseBody
     public String createPost() {
         return "Here is the for to create a post!";
