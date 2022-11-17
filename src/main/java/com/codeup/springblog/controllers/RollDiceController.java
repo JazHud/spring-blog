@@ -11,7 +11,7 @@ public class RollDiceController {
     @GetMapping("/roll-dice")
     @ResponseBody
     public String intro(){
-        return "Guess a number 1 through 6";
+        return "roll-Dice";
     }
 
     @GetMapping("/roll-dice/{n}")
