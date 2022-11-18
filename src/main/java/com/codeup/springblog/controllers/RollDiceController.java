@@ -18,9 +18,11 @@ public class RollDiceController {
     @GetMapping("/roll-dice/{n}")
     public String rollGuess(@PathVariable int n, Model model){
         model.addAttribute("n", n);
-        double rand = (Math.random() + 1);
         return "rollDice";
-
         }
+
+    public static int generateRandomNumber(){
+        return (int) Math.ceil(Math.random() * 6);
+    }
 
 }
