@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index for Posts</title>
+    <title>All Posts</title>
 </head>
 <body>
-<h1>Index of posts.</h1>
+    <h1>Your feed: </h1>
+    <ul th:each="post : ${allPosts}">
+        <li>
+            <h2 th:text="${post.title}"></h2>
+            <p th:text="${post.body}"></p>
+        </li>
+    </ul>
 </body>
 </html>

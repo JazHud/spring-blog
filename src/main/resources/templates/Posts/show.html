@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Show for Posts</title>
+    <title>Show one Posts</title>
 </head>
 <body>
-<h1>Show for posts.</h1>
+    <div th:if="${post}">
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="${post.body}"></p>
+        <p th:unless="${post}">Could not find post</p>
+    </div>
+<!--    <h2 th:text="${post.title}"></h2>-->
+<!--        <p th:text="${post.body}"></p>-->
 </body>
 </html>
