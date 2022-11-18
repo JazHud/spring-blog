@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/particals-roll-dice.html :: head ('Roll the Dice')">
+<head th:replace="partials/particals-roll-dice.html :: head">
 </head>
 <body>
-  <h1>Roll the Dice</h1>
-  <h2>Guess a number below</h2>
+<div th:replace="partials/particals-roll-dice.html :: bootstrap-nav"></div>
+
+<h1>Roll the Dice</h1>
+<div th:replace="partials/particals-roll-dice.html :: header"></div>
+<h2>Guess a number below</h2>
+
   <ul>
     <li><a href="/roll-dice/1">1</a></li>
     <li><a href="/roll-dice/2">2</a></li>
@@ -13,5 +17,13 @@
     <li><a href="/roll-dice/5">5</a></li>
     <li><a href="/roll-dice/6">6</a></li>
   </ul>
+<div th:if="${n}">
+  <h3 th:if="${n} == ${diceRoll}"> YOU GUESSED RIGHT! </h3>
+  <h5 th:if="${n} != ${diceRoll}"> Sorry wrong guess! </h5>
+  <h4 th:if="${n}">You guessed the number: <span th:text="${n}"></span></h4>
+  <h4 th:if="${diceRoll}"> The correct number is: <span th:text="${diceRoll}"></span></h4>
+<!--//NOTE ${} CAN ONLY ACCEPT MULTIPLE OBJECTS WITH THE SAME DATA TYPE OTHERWISE COULD HAVE DONE ${n == diceRoll}-->
+</div>
+<div th:replace="partials/particals-roll-dice.html :: footer"></div>
 </body>
 </html>

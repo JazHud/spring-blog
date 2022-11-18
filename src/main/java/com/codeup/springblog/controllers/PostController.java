@@ -11,9 +11,13 @@ import javax.swing.text.html.HTMLDocument;
 public class PostController {
 
     @GetMapping
-    @ResponseBody
     public String allPosts() {
-        return "Here are all the posts:...";
+        return "posts/index";
+    }
+
+    @GetMapping("/show")
+    public String allShows(){
+        return "posts/show";
     }
 
     @GetMapping("/{id}")
