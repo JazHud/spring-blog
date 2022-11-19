@@ -1,6 +1,5 @@
 package com.codeup.springblog.models;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
@@ -10,15 +9,13 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
 
     @Column(nullable = false, length = 100)
     private String title;
 
     @Column(nullable = false, length = 1000)
     private String body;
-
-
 
 
     public String getTitle() {
@@ -36,10 +33,10 @@ public class Post {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public Post(){
@@ -53,6 +50,6 @@ public class Post {
     public Post(String title, String body, long id) {
         this.title = title;
         this.body = body;
-        Id = id;
+        this.id = id;
     }
 }
