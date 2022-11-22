@@ -20,28 +20,26 @@ public class PostController {
         this.postDao = postDao;
     }
 
-
     @GetMapping
     public String allPosts(Model model) {
         List <Post> allPosts = postDao.findAll();
         model.addAttribute("allPosts", allPosts);
-        return "Posts/index";
+        return "posts/index";
     }
 
     @GetMapping("/{id}")
     public String onePost(@PathVariable long id, Model model){
-        if(postDao.getPostById(id) == null){
+        if(postDao.findById(id) == null){
             return "redirect:/posts";
         }
-        Post post = postDao.getPostById(id);
+        Post post = postDao.findById(id);
         model.addAttribute("post", post);
-//        model.addAttribute("postId", id);
-        return "Posts/show";
+        return "posts/show";
     }
 
     @GetMapping("/create")
     public String createPostForm() {
-        return "Posts/post-form";
+        return "posts/post-form";
     }
 
     @PostMapping("/create")

@@ -4,14 +4,13 @@
 </head>
 <body>
     <h2>Your feed: </h2>
-    <nav th bootstrap-card">
         <ul th:each="post : ${allPosts}">
             <li>
                 <h2 th:text="${post.title}"></h2>
                 <p th:text="${post.body}"></p>
             </li>
         </ul>
-    </nav>
+
 
 </body>
 </html>
