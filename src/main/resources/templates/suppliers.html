@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suppliers</title>
+</head>
+<body>
+<h2>Enter a supplier:</h2>
+<form action="/coffee/suppliers" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <input type="submit" value="Enter">
+</form>
+<!--code below is to not show the list if there are 0 suppliers-->
+<div th:if="${suppliers.size() > 0}">
+    <h2>List of Suppliers: </h2>
+    <ul>
+        <li th:each="supplier : ${suppliers}"
+            th:text="${supplier.name}"></li>
+    </ul>
+</div>
+</body>
+</html>

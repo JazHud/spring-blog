@@ -19,6 +19,10 @@ public class Coffee {
     @Column(nullable = false, length = 100)
     private String brand;
 
+
+    @ManyToOne
+    private Supplier supplier;
+
     public Coffee() {
     }
 
@@ -34,6 +38,13 @@ public class Coffee {
         this.roast = roast;
         this.origin = origin;
         this.brand = brand;
+    }
+
+    public Coffee(String roast, String origin, String brand, Supplier supplier) {
+        this.roast = roast;
+        this.origin = origin;
+        this.brand = brand;
+        this.supplier = supplier;
     }
 
     public String getRoast() {
@@ -66,6 +77,13 @@ public class Coffee {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }
 

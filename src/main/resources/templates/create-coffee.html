@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Insert a Coffee Into our Database</title>
@@ -9,11 +9,18 @@
   <legend>Add a Coffee</legend>
   <form action="/coffee/new" method="post">
     <label for="brand">Brand:</label>
-    <input type="text" id="brand" name="brand">
+    <input type="text" id="brand" name="brand"><br>
     <label for="roast">Roast:</label>
-    <input type="text" id="roast" name="roast">
+    <input type="text" id="roast" name="roast"><br>
     <label for="origin">Origin:</label>
-    <input type="text" id="origin" name="origin">
+    <input type="text" id="origin" name="origin"><br>
+    <select name="supplier" id="suppliers">
+      <option
+              th:each="supplier : ${suppliers}"
+              th:value="${supplier.id}"
+              th:text="${supplier.name}">
+      </option>
+    </select><br>
     <input type="submit" value="submit">
   </form>
 </fieldset>
