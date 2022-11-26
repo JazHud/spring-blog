@@ -1,0 +1,10 @@
+body {
+    background-image: url("images/AdobeStock_404294498.jpeg");
+    font-family: "Arial Black";
+    opacity: 80%;
+}
+
+image {
+    display: flex;
+    align-content: center;
+}

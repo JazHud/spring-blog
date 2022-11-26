@@ -3,14 +3,19 @@
 <head th:replace="partials/post-partials.html :: head ('All Posts')">
 </head>
 <body>
-    <h2>Your feed: </h2>
-        <ul th:each="post : ${allPosts}">
-            <li>
-                <h2 th:text="${post.title}"></h2>
-                <p th:text="${post.body}"></p>
-            </li>
-        </ul>
+<div th:replace="partials/post-partials.html :: bootstrap-nav"></div>
+<div th:replace="partials/post-partials.html :: blog-card"></div>
 
+
+
+
+<!--    <h2>Your feed: </h2>-->
+<!--        <ul th:each="post : ${allPosts}">-->
+<!--            <li>-->
+<!--                <h2 th:text="${post.title}"></h2>-->
+<!--                <p th:text="${post.body}"></p>-->
+<!--            </li>-->
+<!--        </ul>-->
 
 </body>
 </html>
