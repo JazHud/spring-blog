@@ -11,10 +11,9 @@
 <!--!!!!!!!PRACTICE PARTIALS!!!!!!-->
 
 <!--Title for "YOUR FEED"-->
-<nav th:fragment="bootstrap-nav" class="navbar navbar-expand-lg bg-secondary bg-image=src=">
-    <img src="static/css/images/Untitled.png">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><h3>BLO'TS</h3><p>Blogging Thoughts</p></a>
+<nav th:fragment="bootstrap-nav (pageTitle, pageNamesake)" class="navbar navbar-expand-lg bg-secondary bg-image=src=">
+    <div class="container-fluid m-2">
+        <a class="navbar-brand" href="#" th:text="${pageTitle}"><h3></h3><p th:text="${pageNamesake}"></p></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,7 +35,7 @@
 
 <!--CARDS-->
 <div th:fragment="blog-card" class="row d-flex p-4">
-    <div th:each="post : ${allPosts}" class="col-sm-6">
+    <div th:each="post : ${allPosts}" class="col-sm-6 p-3">
         <div class="card">
             <div class="card-body text-bg-secondary">
                 <h5 th:text="${post.title}" class="card-title"></h5>

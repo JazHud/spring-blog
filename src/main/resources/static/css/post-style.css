@@ -8,3 +8,10 @@ image {
     display: flex;
     align-content: center;
 }
+
+nav {
+    text: white;
+    text-align: center;
+    opacity: 70%;
+    text-outline: 2px cyan;
+}
