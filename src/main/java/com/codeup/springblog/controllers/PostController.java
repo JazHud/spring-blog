@@ -62,16 +62,15 @@ public class PostController{
     }
 
     @GetMapping("/create")
-    public String createPostForm() {
+    public String createPostForm(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/post-form";
     }
 
     @PostMapping("/create")
-    public String addPost(@RequestParam(name="title") String title,
-                          @RequestParam(name="body") String body){
-
-        User user = userDao.getById(2L);
-        Post post = new Post(title, body, user);
+    public String addPost(@ModelAttribute Post post){
+//        User user = userDao.getById(2L);
+//        Post post = new Post(title, body, user);
         postDao.save(post);
         return "redirect:/posts";
     }

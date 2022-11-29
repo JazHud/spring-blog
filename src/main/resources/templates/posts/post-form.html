@@ -5,14 +5,27 @@
     <title>Post Form</title>
 </head>
 <body>
-<!--pay attention to form action and method!!!-->
-    <form action="/posts/create" method="post">
+    <form action="@{/posts/create}" method="post" th:object="${post}">
         <label for="title">Blog Title:</label><br>
-        <input type="text" id="title" name="title"><br>
+        <input type="text" id="title" name="title" th:field="*{post.title}"><br>
         <label for="body">Blog Body:</label><br>
-        <input type="text" id="body" name="body"><br><br>
+        <input type="text" id="body" name="body" th:field="*{post.body}"><br><br>
         <input type="submit" value="Submit">
-<!--text area would be better for text input-->
+        <!--text area would be better for text input-->
     </form>
+
+
+
+
+
+<!--pay attention to form action and method!!!-->
+<!--    <form action="/posts/create" method="post">-->
+<!--        <label for="title">Blog Title:</label><br>-->
+<!--        <input type="text" id="title" name="title"><br>-->
+<!--        <label for="body">Blog Body:</label><br>-->
+<!--        <input type="text" id="body" name="body"><br><br>-->
+<!--        <input type="submit" value="Submit">-->
+<!--&lt;!&ndash;text area would be better for text input&ndash;&gt;-->
+<!--    </form>-->
 </body>
 </html>
