@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="coffees")
@@ -19,9 +20,11 @@ public class Coffee {
     @Column(nullable = false, length = 100)
     private String brand;
 
-
     @ManyToOne
     private Supplier supplier;
+
+    @ManyToMany(mappedBy = "coffeeList")
+    private List<Customer> customerList;
 
     public Coffee() {
     }
@@ -66,7 +69,6 @@ public class Coffee {
     public String getBrand() {
         return brand;
     }
-
     public void setBrand(String brand) {
         this.brand = brand;
     }

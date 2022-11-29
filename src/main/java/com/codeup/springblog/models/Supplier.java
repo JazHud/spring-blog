@@ -14,8 +14,22 @@ public class Supplier {
     @Column (nullable = false)
     private String name;
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier")
     private List<Coffee> coffees;
+
+
+    public Supplier(){
+
+    }
+    public Supplier(String name) {
+        this.name = name;
+    }
+
+    public Supplier(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -31,16 +45,10 @@ public class Supplier {
         this.name = name;
     }
 
-    public Supplier(){
-
+    public List<Coffee> getCoffees() {
+        return coffees;
     }
-
-    public Supplier(String name) {
-        this.name = name;
-    }
-
-    public Supplier(long id, String name) {
-        this.id = id;
-        this.name = name;
+    public void setCoffees(List<Coffee> coffees) {
+        this.coffees = coffees;
     }
 }
