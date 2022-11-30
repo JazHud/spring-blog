@@ -23,19 +23,21 @@ public class PostController{
         this.userDao = userDao;
     }
 
-//    @GetMapping("/user-login")
-//    public String createUser(){
-//        return "posts/user-login";
-//    }
-//
-//    @PostMapping("/user-login")
-//    public String addUser(@RequestParam(name="username") String username,
-//                          @RequestParam(name="email") String email,
-//                          @RequestParam(name="password")String password){
-//        User user = new User(username, email, password);
-//        userDao.save(user);
-//        return "redirect:/posts/index";
-//    }
+    @GetMapping("/user-login")
+    public String createUser(){
+        User user = new User();
+        userDao.save(user);
+        return "posts/user-login";
+    }
+
+    @PostMapping("/user-login")
+    public String addUser(@RequestParam(name="username") String username,
+                          @RequestParam(name="email") String email,
+                          @RequestParam(name="password")String password){
+        User user = new User(username, email, password);
+        userDao.save(user);
+        return "redirect:/posts/index";
+    }
 
 
     @GetMapping
@@ -69,8 +71,23 @@ public class PostController{
 
     @PostMapping("/create")
     public String addPost(@ModelAttribute Post post){
-//        User user = userDao.getById(2L);
-//        Post post = new Post(title, body, user);
+        User user = userDao.getById(2L);
+        post.setUser(user);
+        postDao.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String toEdit(@PathVariable long id, Model model){
+        Post post = postDao.findById(id);
+        model.addAttribute("post", post);
+        return "/posts/edit-form";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editPost(@ModelAttribute Post post, @PathVariable long id) {
+       User user = userDao.getById(2L);
+        post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";
     }

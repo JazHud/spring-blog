@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Post Form</title>
 </head>
 <body>
-    <form action="@{/posts/create}" method="post" th:object="${post}">
+    <form action="/posts/create" method="post" th:object="${post}">
         <label for="title">Blog Title:</label><br>
-        <input type="text" id="title" name="title" th:field="*{post.title}"><br>
+        <input type="text" id="title" name="title" th:field="*{title}"><br>
         <label for="body">Blog Body:</label><br>
-        <input type="text" id="body" name="body" th:field="*{post.body}"><br><br>
+        <input type="text" id="body" name="body" th:field="*{body}"><br><br>
         <input type="submit" value="Submit">
+<!--        <button class="edit" th:data-post-id="${post.id}" th:data-user-id="${post.user.id}"}>Edit Here</button>-->
         <!--text area would be better for text input-->
     </form>
 
@@ -27,5 +28,7 @@
 <!--        <input type="submit" value="Submit">-->
 <!--&lt;!&ndash;text area would be better for text input&ndash;&gt;-->
 <!--    </form>-->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
