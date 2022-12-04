@@ -5,6 +5,19 @@
     <title>Show One Post</title>
 </head>
 <body>
+<!--To search by word within a post-->
+    <form th:action="@{/posts/search}" method="post" th:object="${post}">
+        <label for="searchWord">Please enter one word to search in post:</label><br>
+        <input type="text" id="searchWord" name="SearchWord"><br>
+    </form>
+
+<div th:if="${post}">
+    <p th:text="${post.user.username}"></p>
+</div>
+
+
+</div>
+
 <div th:if="${post}">
     <h2 th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>

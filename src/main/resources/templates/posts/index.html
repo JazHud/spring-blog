@@ -1,21 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head th:replace="partials/post-partials.html :: head ('All Posts')">
-</head>
+    <title>All Posts</title></head>
 <body>
-<div th:replace="partials/post-partials.html :: bootstrap-nav ('Blo-Ts')"></div>
-<div th:replace="partials/post-partials.html :: blog-card"></div>
+<nav th:replace="partials/post-partials.html :: bootstrap-nav('Blog-N Thoughts')"></nav>
 
+<div th:replace="partials/post-partials.html ::blog-cards"></div>
 
-
-
-<!--    <h2>Your feed: </h2>-->
-<!--        <ul th:each="post : ${allPosts}">-->
-<!--            <li>-->
-<!--                <h2 th:text="${post.title}"></h2>-->
-<!--                <p th:text="${post.body}"></p>-->
-<!--            </li>-->
-<!--        </ul>-->
-
+<script th:replace="partials/post-partials.html :: scripts"></script>
 </body>
 </html>

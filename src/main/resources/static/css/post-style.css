@@ -1,17 +1,12 @@
 body {
     background-image: url("images/AdobeStock_404294498.jpeg");
-    font-family: "Arial Black";
+    font-family: "Verdana", "Arial Black", "Times New Roman";
     opacity: 80%;
 }
 
-image {
-    display: flex;
-    align-content: center;
-}
 
 nav {
-    text: white;
     text-align: center;
     opacity: 70%;
-    text-outline: 2px cyan;
+    border-color: chartreuse;
 }

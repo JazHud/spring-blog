@@ -5,11 +5,14 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailServices;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 @RequestMapping("/posts") /// <-- will at to the @GetMapping's below
@@ -18,9 +21,12 @@ public class PostController{
     private final PostRepository postDao;
     private final UserRepository userDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    private final EmailServices emailServices;
+
+    public PostController(PostRepository postDao, UserRepository userDao, EmailServices emailServices){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailServices = emailServices;
     }
 
     @GetMapping("/user-login")
@@ -53,6 +59,23 @@ public class PostController{
         return "posts/index";
     }
 
+//    To search by one work in a post
+    @GetMapping("/search")
+    public String getUsers(Model model, String username){
+        List <User> allUsers = userDao.findByUsername(username);
+        model.addAttribute("allUsers", allUsers);
+        return "posts/show";
+    }
+
+    @PostMapping("/search")
+    public String foundUsernames(@ModelAttribute Model model, String username){
+        List <User> allUsers = userDao.findByUsername(username);
+        userDao.saveAll(allUsers);
+        model.addAttribute("allUsers", allUsers);
+        return "posts/show";
+    }
+
+
     @GetMapping("/{id}")
     public String onePost(@PathVariable long id, Model model){
         if(postDao.findById(id) == null){
@@ -71,22 +94,35 @@ public class PostController{
 
     @PostMapping("/create")
     public String addPost(@ModelAttribute Post post){
-        User user = userDao.getById(2L);
-        post.setUser(user);
+//        the line below can access the logged in user from a controller (aka User controller) and from there it has access to the User object.
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
         postDao.save(post);
-        return "redirect:/posts";
+        emailServices.prepareAndSend(loggedInUser, post.getTitle(), post.getBody());
+        return "redirect:";
     }
 
     @GetMapping("/{id}/edit")
     public String toEdit(@PathVariable long id, Model model){
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if (currentUserId == 0){
+            return "redirect:/user/registration";
+        }
         Post post = postDao.findById(id);
+        if(post.getUser().getId() != currentUserId){
+            return "redirect:/posts";
+        }
         model.addAttribute("post", post);
         return "/posts/edit-form";
     }
 
     @PostMapping("/{id}/edit")
-    public String editPost(@ModelAttribute Post post, @PathVariable long id) {
-       User user = userDao.getById(2L);
+    public String editPost(@ModelAttribute Post post) {
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if (currentUserId == 0){
+            return "redirect:/login";
+        }
+        User user = userDao.findById(currentUserId);
         post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";

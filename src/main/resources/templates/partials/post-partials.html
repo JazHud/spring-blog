@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<!--thymeleaf for the head (GOOD)-->
 <head th:fragment="head (title)">
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/post-style.css}">
+
 </head>
 <body>
-<!--!!!!!!!PRACTICE PARTIALS!!!!!!-->
-
 <!--Title for "YOUR FEED"-->
-<nav th:fragment="bootstrap-nav (pageTitle)" class="navbar navbar-expand-lg bg-secondary bg-image=src=">
+<nav th:fragment="bootstrap-nav (pageTitle)" class="navbar navbar-expand-lg bg-secondary">
     <div class="container-fluid m-2">
         <a class="navbar-brand" href="#" th:text="${pageTitle}"><h3></h3><p>Blogg'n Thoughts</p></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,26 +20,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="http://localhost:8080/posts">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Create</a>
+                    <a class="nav-link" href="http://localhost:8080/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/posts/create">Create</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Search</a>
+                </li>
+                <li>
+                    <form th:action="@{/logout}" th:method="post">
+                        <button>Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!--CARDS-->
-<div th:fragment="blog-card" class="row d-flex p-4">
+<!--CARDS to show each posts!!!-->
+<div th:fragment="blog-cards" class="row d-flex p-4">
     <div th:each="post : ${allPosts}" class="col-sm-6 p-3">
         <div class="card">
             <div class="card-body text-bg-secondary">
                 <h5 th:text="${post.title}" class="card-title"></h5>
                 <p th:text="${post.body}" class="card-text"></p>
+                    <div sec:authorize="isAuthenticated()">
+                     Created by:  <p th:text="${post.user.username}"></p>
+                        <p th:if="${post.user.id} == ${#authentication.principal.id}">
+                            <button th:data-id="${post.id}" class="editButton">Edit</button>
+                        </p>
+                    </div>
             </div>
         </div>
     </div>
@@ -48,8 +62,10 @@
 
 
 
-
-
+    <div th:fragment="scripts">
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="/static/js/edit.js"></script>>
+    </div>
 
 </body>
 </html>
