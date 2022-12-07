@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Log In</title>
-</head>
-<body>
-<h1>Log In</h1>
-<div th:if="${param.error}">
-  Invalid Username and Password.
+<head th:replace="partials/post-partials.html :: head ('Login Page')"><title>Please Log-In</title></head>
+<body >
+<nav th:replace="partials/post-partials.html :: bootstrap-nav('Blog-N Thoughts')"></nav>
+<div class="loginTitle-bodyContainer">
+    <h1 class="loginTitile">Log In</h1><br>
+    <div th:if="${param.error}">
+        Invalid Username and Password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text"><br>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password"><br>
+        </p>
+        <input type="submit" value="Log In"><br>
+    </form><br>
+    <h4>Already a User? Please click <a href="http://localhost:8080/posts/user-login">here</a></h4>
 </div>
-<div th:if="${param.logout}">
-  You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-  <label for="username">Username</label>
-  <input id="username" name="username" type="text">
-  <label for="password">Password</label>
-  <input id="password" name="password" type="password">
-  <input type="submit" value="Log In">
-</form>
+
 </body>
 </html>

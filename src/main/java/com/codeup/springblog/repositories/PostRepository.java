@@ -7,6 +7,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post findPostByBodyContaining(String wordSearch);
     Post findByTitle(String title);
     Post findById(long id);
+//    Post deletePostById(long id);
 }
 
 

@@ -33,7 +33,7 @@ public class PostController{
     public String createUser(){
         User user = new User();
         userDao.save(user);
-        return "posts/user-login";
+        return "posts/loginPage";
     }
 
     @PostMapping("/user-login")
@@ -60,19 +60,24 @@ public class PostController{
     }
 
 //    To search by one work in a post
-    @GetMapping("/search")
-    public String getUsers(Model model, String username){
-        List <User> allUsers = userDao.findByUsername(username);
-        model.addAttribute("allUsers", allUsers);
-        return "posts/show";
+//    @GetMapping("/search")
+    @GetMapping("/{username}/search")
+    public String findUsername(Model model){
+        User searchedUser = new User();
+        searchedUser = userDao.findByUsername(searchedUser.getUsername());
+        model.addAttribute("searchedUser", searchedUser);
+            return "redirect:/posts/search-form";
     }
 
-    @PostMapping("/search")
-    public String foundUsernames(@ModelAttribute Model model, String username){
-        List <User> allUsers = userDao.findByUsername(username);
-        userDao.saveAll(allUsers);
-        model.addAttribute("allUsers", allUsers);
-        return "posts/show";
+    @PostMapping("/{username}/search")
+    public String foundUsername(@ModelAttribute User user) {
+        if (userDao.findByUsername(user.getUsername()) == null) {
+            return "redirect:/posts";
+        }
+        User foundUser = new User();
+        userDao.findByUsername(foundUser.getUsername());
+        userDao.save(user);
+        return "redirect:/posts/search-form";
     }
 
 
@@ -127,6 +132,29 @@ public class PostController{
         postDao.save(post);
         return "redirect:/posts";
     }
+
+    @GetMapping("/{id}/delete")
+    public String toDelete(@PathVariable long id){
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+//        if (currentUserId == 0){
+//            return "redirect:/user/registration";
+//        }
+        Post post = postDao.findById(id);
+        if(post.getUser().getId() == currentUserId) {
+            postDao.delete(post);
+        }
+        return "redirect:/posts";
+    }
+
+//    @PostMapping("/{id}/delete")
+//    public String deletePost(@ModelAttribute Post post){
+//        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+//        if (currentUserId == 0){
+//            return "redirect:/login";
+//        }
+//        postDao.delete(post);
+//            return "redirect:/posts";
+//    }
 
 }
 

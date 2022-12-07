@@ -20,10 +20,11 @@ public class SpringBlogUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = usersDao.findByUsername(username);
-        if(username == null){
+        if (user == null) {
             throw new UsernameNotFoundException("User details not found for user: " + username);
         } else {
             return new SpringBlogUserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPassword());
         }
     }
 }
+

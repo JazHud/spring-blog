@@ -1,12 +1,99 @@
 body {
+    display: flex;
+    flex-direction: column;
     background-image: url("images/AdobeStock_404294498.jpeg");
-    font-family: "Verdana", "Arial Black", "Times New Roman";
+    font-family: "American Typewriter", "Arial Black", "Times New Roman";
+    font-size: x-large;
     opacity: 80%;
+    font-weight: bold;
 }
 
 
 nav {
-    text-align: center;
-    opacity: 70%;
-    border-color: chartreuse;
+    opacity: 90%;
+
 }
+
+.card-body{
+    color: black;
+    background: black;
+    border-color: black;
+    border-radius: 9px;
+}
+
+.logoutButton {
+    display: flex;
+    align-self: flex-end;
+    /*font-weight: bold;*/
+    color: white;
+    opacity: 50%;
+    font-weight: bold;
+    background: none;
+    margin-top: 7px;
+    border-left-color: deeppink;
+    border-right-color: yellow;
+    border-top: dodgerblue 1px;
+    border-bottom: dodgerblue 3px;
+    border-radius: 9px;
+}
+
+/*.loginTitile {*/
+/*    color: lightgray;*/
+/*    text-align: center;*/
+/*}*/
+
+.loginTitle-bodyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    padding: 150px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+
+/*Styling for my edit page*/
+.editUser-info{
+    color: white;
+}
+
+.editForm, .createPost {
+    color: dodgerblue;
+    margin-top: 70px;
+    /*color: white;*/
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-color: white;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 9px;
+    align-self: center;
+    justify-content: center;
+    font-weight: bold;
+    font-style: oblique;
+    width: 60%;
+    height: 50%;
+
+}
+.createPost {
+    background-image: url("images/AdobeStock_404294498 (1).jpeg");
+    opacity: 95%;
+    border: white  3px;
+}
+
+.editForm {
+    background-image: url("images/AdobeStock_404294498.jpeg");
+    opacity: 85%;
+}
+
+.editButton, .deleteButton{
+    border-radius: 10px;
+    border-color: yellow;
+    background-color: black;
+    color: deeppink;
+    font-weight: bold;
+}
+

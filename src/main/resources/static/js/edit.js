@@ -4,4 +4,9 @@ $(document).ready(function (){
         window.location.replace(`/posts/${$(this).attr("data-id")}/edit`)
         // $.get(`/posts/${$(this).attr("data-id")}`);
     });
+
+    $(".deleteButton").on('click', function(){
+        window.location.replace(`posts/${$(this).attr("data-id")}/delete`)
+    });
+
 });
